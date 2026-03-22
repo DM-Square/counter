@@ -4,8 +4,7 @@
 
 ### A minimal, keyboard-friendly counter app — built with vanilla JavaScript.
 
-[![App here](https://img.shields.io/badge/▶%20Live%20Demo-Click%20Here-ffd500?style=for-the-badge&labelColor=151515)](https://c-on-me.netlify.app/)
-[![My GitHub profile](https://img.shields.io/badge/GitHub-Repository-ffd500?style=for-the-badge&logo=github&labelColor=151515)](https://github.com/DM-Square/)
+[![Live Demo](https://img.shields.io/badge/▶%20Live%20Demo-Click%20Here-ffd500?style=for-the-badge&labelColor=151515)](https://c-on-me.netlify.app/)
 
 ![Count on Me screenshot](assets/img/count-on-me.png)
 

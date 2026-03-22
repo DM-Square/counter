@@ -15,13 +15,13 @@
 
 ## 📋 Table of Contents
 
-- [About the Project](#about-the-project)
-- [Features](#features)
-- [Built With](#built-with)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Roadmap](#roadmap)
-- [License](#license)
+- [About the Project]
+- [Features]
+- [Built With]
+- [Getting Started]
+- [Usage]
+- [Roadmap]
+- [License]
 
 ---
 

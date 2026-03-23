@@ -14,12 +14,12 @@
 
 ## 📋 Table of Contents
 
-- **About the Project**
-- **Features**
-- **Built With**
-- **Getting Started**
-- **Usage**
-- **Contacts**
+- [**About the Project**](https://github.com/DM-Square/Count-On-Me/blob/main/README.md#-about-the-project)
+- [**Features**](https://github.com/DM-Square/Count-On-Me/blob/main/README.md#-features)
+- [**Built With**](https://github.com/DM-Square/Count-On-Me/blob/main/README.md#-built-with)
+- [**Getting Started**](https://github.com/DM-Square/Count-On-Me/blob/main/README.md#-getting-started)
+- [**Usage**](https://github.com/DM-Square/Count-On-Me/blob/main/README.md#-usage)
+- [**Contacts**](https://github.com/DM-Square/Count-On-Me/blob/main/README.md#-contacts)
 
 ---
 

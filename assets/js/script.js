@@ -8,6 +8,8 @@ const resetBtn = document.createElement(`button`);
 const title = document.createElement(`h1`);
 const cssLink = document.createElement(`link`);
 
+// Classi
+
 counterContainer.classList.add("container");
 plusBtn.classList.add("btn-main");
 minusBtn.classList.add("btn-main");
@@ -28,13 +30,9 @@ cssLink.setAttribute("rel", "stylesheet");
 cssLink.setAttribute("href", "assets/css/main.css");
 document.head.append(cssLink);
 
-document.body.append(title);
-document.body.append(counterContainer);
+document.body.append(title, counterContainer);
 
-counterContainer.append(displayCounter);
-counterContainer.append(plusBtn);
-counterContainer.append(minusBtn);
-counterContainer.append(resetBtn);
+counterContainer.append(displayCounter, plusBtn, minusBtn, resetBtn);
 
 // Counter
 
@@ -42,44 +40,36 @@ let counter = 0;
 const maxCounter = 999999999;
 const minCounter = -999999999;
 
-displayCounter.textContent = counter;
-
-function increase() {
-  if (counter < maxCounter) {
-    counter++;
-    displayCounter.textContent = counter;
-    saveCounter();
-  } else if (counter === maxCounter) {
-    counterShake(counterContainer);
-  }
-}
-
-function decrease() {
-  if (counter > minCounter) {
-    counter--;
-    displayCounter.textContent = counter;
-    saveCounter();
-  } else if (counter === minCounter) {
-    counterShake(counterContainer);
-  }
-}
-
-function reset() {
-  counter = 0;
+function updateCounter() {
   displayCounter.textContent = counter;
-  saveCounter();
+  localStorage.setItem("counterValue", counter);
 }
 
-function saveCounter() {
-  localStorage.setItem("counterValue", counter);
+function changeCounter(amount) {
+  const newCounter = counter + amount;
+
+  if (newCounter > maxCounter || newCounter < minCounter) {
+    counterShake(counterContainer);
+    return;
+  }
+
+  counter = newCounter;
+  updateCounter();
+}
+
+function resetCounter() {
+  counter = 0;
+  updateCounter();
 }
 
 function retrieveCounter() {
   const storedCounter = localStorage.getItem("counterValue");
   if (storedCounter !== null) {
     counter = Number(storedCounter);
-    displayCounter.textContent = counter;
+  } else {
+    counter = 0;
   }
+  updateCounter();
 }
 
 // Funzioni di Animazione
@@ -103,28 +93,30 @@ function counterShake(container) {
 
 document.addEventListener("DOMContentLoaded", retrieveCounter);
 
-plusBtn.addEventListener(`click`, () => {
-  increase();
-  btnPressed(plusBtn);
-});
-minusBtn.addEventListener(`click`, () => {
-  decrease();
-  btnPressed(minusBtn);
-});
-resetBtn.addEventListener(`click`, () => {
-  reset();
-  btnPressed(resetBtn);
+const btnActions = [
+  { btn: plusBtn, fn: () => changeCounter(1) },
+  { btn: minusBtn, fn: () => changeCounter(-1) },
+  { btn: resetBtn, fn: () => resetCounter() },
+];
+
+btnActions.forEach(({ btn, fn }) => {
+  btn.addEventListener(`click`, () => {
+    fn();
+    btnPressed(btn);
+  });
 });
 
-document.addEventListener(`keydown`, (e) => {
-  if (e.key === `+` || e.code === `NumpadAdd`) {
-    increase();
-    btnPressed(plusBtn);
-  } else if (e.key === `-` || e.code === `NumpadSubtract`) {
-    decrease();
-    btnPressed(minusBtn);
-  } else if (e.key === `0` || e.key === `r` || e.code === `Numpad0`) {
-    reset();
-    btnPressed(resetBtn);
-  }
+const keyActions = [
+  { keys: ["+", "NumpadAdd"], btn: plusBtn, fn: () => changeCounter(1) },
+  { keys: ["-", "NumpadSubtract"], btn: minusBtn, fn: () => changeCounter(-1) },
+  { keys: ["0", "r", "Numpad0"], btn: resetBtn, fn: () => resetCounter() },
+];
+
+document.addEventListener("keydown", (e) => {
+  keyActions.forEach(({ keys, btn, fn }) => {
+    if (keys.includes(e.key) || keys.includes(e.code)) {
+      fn();
+      btnPressed(btn);
+    }
+  });
 });
